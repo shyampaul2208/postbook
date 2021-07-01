@@ -9,23 +9,15 @@ const cors=require("cors");
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-// app.use(
-//     cors({
-//       origin: "http://localhost:3000", // allow to server to accept request from different origin
-//       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//       credentials: true // allow session cookie from browser to pass through
-//     })
-//   );
+ app.use(
+     cors({
+       origin: "http://localhost:3000", // allow to server to accept request from different origin
+       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+       credentials: true // allow session cookie from browser to pass through
+     })
+   );
 
-app.use(cors(
-  {
-    "origin": "http://localhost:3000",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204,
-    "credentials":true
-  }
-));
+
   
 app.use(express.json({limit: '50mb'}))
 app.use(express.urlencoded({extended:true,limit: '50mb'}))
@@ -119,6 +111,7 @@ app.get('/failed', (req, res) => {
 
 
   app.get("/",checkUserLoggedIn,(req,res)=>{
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.status(200).json({
       user:req.user,
       cookies:req.cookies
@@ -145,7 +138,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.redirect("/succcess");
+    res.redirect("http://localhost:3000");
   }
 );
 
