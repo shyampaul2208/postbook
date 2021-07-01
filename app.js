@@ -2,16 +2,19 @@ const express=require("express")
 const mongoose=require("mongoose");
 const app=express()
 const passport = require('passport');
-const cookieSession = require('cookie-session');
+const session = require('express-session')
 const cookieParser = require("cookie-parser");
 const cors=require("cors");
 
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+
+app.set("trust proxy",1);
+
   app.use(
       cors({
-      origin: "http://localhost:3000", // allow to server to accept request from different origin
+       origin: "http://localhost:3000", // allow to server to accept request from different origin
        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
        credentials: true // allow session cookie from browser to pass through
       })
@@ -82,13 +85,22 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.use(cookieParser());
+//app.use(cookieParser());
 
 //Configure Session Storage
-app.use(cookieSession({
-  name: 'session-name',
-  keys: ["key1","key2"]
-}))
+
+app.use(
+  session({
+    secret: "secretcode",
+    resave:true,
+    saveUninitialized:true,
+    cookie:{
+      sameSite:"none",
+      secure:true,
+      maxAge:1000*60*60*24*7 //one week
+    }
+  })
+)
 
 
 //Configure Passport
