@@ -20,8 +20,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
   
 
   
-app.use(express.json({limit: '50mb'}))
-app.use(express.urlencoded({extended:true,limit: '50mb'}))
+app.use(express.json({limit: '30mb'}))
+app.use(express.urlencoded({extended:true,limit: '30mb'}))
 
 
 
@@ -59,7 +59,7 @@ passport.serializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: "24468091533-938rp6vole9r6tfo206jcdmr7a2n209t.apps.googleusercontent.com",
     clientSecret:"0X7qBzs4hutXG7T8DvH-pyg2" ,
-    callbackURL: "http://localhost:5000/auth/google/good"
+    callbackURL: "https://friendly-celsius-82819.herokuapp.com/auth/google/good"
   },
   function(accessToken, refreshToken, profile, cb) {
     
@@ -121,7 +121,7 @@ app.get('/failed', (req, res) => {
 
 app.get("/login/success", checkUserLoggedIn, (req, res) => {
 
-  console.log("requested")
+
   Post.find({}).then((results)=>{
     res.json(results)
   }).catch(err=>{
@@ -190,13 +190,10 @@ app.get("/post/:id",checkUserLoggedIn,(req,res)=>{
 })
 
 app.get("/:userName",checkUserLoggedIn,(req,res)=>{
-
-  const s = req.params.id;
-const regex = new RegExp(s, 'i') // i for case insensitive
-Post.find({"createdBy.name": {$regex: regex}}).then(results=>{
-  res.json(results);
-})
-
+console.log(req.params.userName);
+  Post.find({"createdBy.name":req.params.userName}).then(results=>{
+    res.json(results);
+  })
 
 })
 
