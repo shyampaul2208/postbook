@@ -14,7 +14,7 @@ app.set("trust proxy",1);
 
   app.use(
       cors({
-       origin: "http://localhost:3000", // allow to server to accept request from different origin
+       origin: "https://blissful-ritchie-b74df9.netlify.app", // allow to server to accept request from different origin
        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
        credentials: true // allow session cookie from browser to pass through
       })
@@ -150,7 +150,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.redirect("http://localhost:3000");
+    res.redirect("https://blissful-ritchie-b74df9.netlify.app/");
   }
 );
 
@@ -159,7 +159,7 @@ app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: 
   app.get('/logout', (req, res)=>{
   
     req.logout();
-    res.redirect("http://localhost:3000");
+    res.redirect("https://blissful-ritchie-b74df9.netlify.app/");
     
 })
 
