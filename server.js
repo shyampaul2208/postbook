@@ -55,7 +55,7 @@ passport.serializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: "24468091533-938rp6vole9r6tfo206jcdmr7a2n209t.apps.googleusercontent.com",
     clientSecret:"0X7qBzs4hutXG7T8DvH-pyg2" ,
-    callbackURL: "http://localhost:5000/auth/google/good"
+    callbackURL: "https://friendly-celsius-82819.herokuapp.com/auth/google/good"
   },
   function(accessToken, refreshToken, profile, cb) {
     
@@ -254,14 +254,18 @@ app.patch("/post/:id",checkUserLoggedIn,(req,res)=>{
 
 
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 5000;
+}
 
 
 
 
 
 
-app.listen(5000,()=>{
+app.listen(port,()=>{
 
 
-    console.log("hii")
+    console.log("server is up and running")
 })
