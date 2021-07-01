@@ -138,9 +138,6 @@ app.get("/login/success", checkUserLoggedIn, (req, res) => {
   })
 })
 
-app.get("/success",checkUserLoggedIn,(req,res)=>{
-  res.redirect("http://localhost:3000");
-})
 
 
   // Auth Routes
@@ -148,7 +145,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.redirect("/success");
+    res.redirect("/succcess");
   }
 );
 
