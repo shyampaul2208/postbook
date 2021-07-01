@@ -9,21 +9,15 @@ const cors=require("cors");
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-//  app.use(
-//      cors({
-//        origin: "http://localhost:3000", // allow to server to accept request from different origin
-//        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//        credentials: true // allow session cookie from browser to pass through
-//      })
-//    );
+  app.use(
+      cors({
+      origin: "http://localhost:3000", // allow to server to accept request from different origin
+       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+       credentials: true // allow session cookie from browser to pass through
+      })
+    );
 
-   app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-  });
-
+  
 
   
 app.use(express.json({limit: '50mb'}))
@@ -65,7 +59,7 @@ passport.serializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: "24468091533-938rp6vole9r6tfo206jcdmr7a2n209t.apps.googleusercontent.com",
     clientSecret:"0X7qBzs4hutXG7T8DvH-pyg2" ,
-    callbackURL: "https://friendly-celsius-82819.herokuapp.com/auth/google/good"
+    callbackURL: "http://localhost:5000/auth/google/good"
   },
   function(accessToken, refreshToken, profile, cb) {
     
@@ -127,7 +121,7 @@ app.get('/failed', (req, res) => {
 
 app.get("/login/success", checkUserLoggedIn, (req, res) => {
 
-  
+  console.log("requested")
   Post.find({}).then((results)=>{
     res.json(results)
   }).catch(err=>{
