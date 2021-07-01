@@ -102,8 +102,6 @@ app.get('/failed', (req, res) => {
   const checkUserLoggedIn = (req, res, next) => {
     if(req.user){
        next();
-    }else{
-      res.redirect("https://friendly-celsius-82819.herokuapp.com/auth/google")
     }
   }
 
@@ -111,7 +109,6 @@ app.get('/failed', (req, res) => {
 
 
   app.get("/",checkUserLoggedIn,(req,res)=>{
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.status(200).json({
       user:req.user,
       cookies:req.cookies
