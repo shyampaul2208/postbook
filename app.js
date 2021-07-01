@@ -99,6 +99,8 @@ app.get('/failed', (req, res) => {
   const checkUserLoggedIn = (req, res, next) => {
     if(req.user){
        next();
+    }else{
+      res.redirect("https://friendly-celsius-82819.herokuapp.com/auth/google")
     }
   }
 
