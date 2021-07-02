@@ -36,7 +36,7 @@ const userSchema=new mongoose.Schema({
 });
 
 const User=mongoose.model("User",userSchema);
-
+const {ObjectId}=mongoose.Schema.Types;
 const postSchema=new mongoose.Schema({
     createdBy:{
       type:ObjectId,
