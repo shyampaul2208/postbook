@@ -217,7 +217,7 @@ app.get("/post/:id",checkUserLoggedIn,(req,res)=>{
 
 app.get("/:userName",checkUserLoggedIn,(req,res)=>{
  
-  let userPattern=new RegExp("^"+req.params.userName,"i")
+  let userPattern=new RegExp("^"+req.params.userName,"i");
   
   User.find({name:{$regex:userPattern}}).then(results=>{
     res.json(results);
@@ -225,6 +225,14 @@ app.get("/:userName",checkUserLoggedIn,(req,res)=>{
     console.log(err);
   })
 
+})
+
+app.get("/user/:userId",checkUserLoggedIn,(req,res)=>{
+  Post.find({createdBy:req.params.userId}).populate("createdBy", "_id name").then(results=>{
+    res.status(200).json(results);
+  }).catch(err=>{
+    console.log(err);
+  })
 })
 
 
