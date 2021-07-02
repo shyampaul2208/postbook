@@ -152,8 +152,8 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    
-    res.redirect("https://blissful-ritchie-b74df9.netlify.app");
+    res.send("hii")
+    //res.redirect("https://blissful-ritchie-b74df9.netlify.app");
   }
 );
 
