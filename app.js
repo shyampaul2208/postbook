@@ -217,7 +217,7 @@ app.get("/post/:id",checkUserLoggedIn,(req,res)=>{
 
 app.get("/:userName",checkUserLoggedIn,(req,res)=>{
  
-  let userPattern=new RegExp("^"+req.params.userName)
+  let userPattern=new RegExp("^"+req.params.userName,"i")
   
   User.find({name:{$regex:userPattern}}).then(results=>{
     res.json(results);
