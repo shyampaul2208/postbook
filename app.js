@@ -123,13 +123,17 @@ app.get('/failed', (req, res) => {
   //Protected Route.
 
 
-  app.get("/",checkUserLoggedIn,(req,res)=>{
+  app.get("/",(req,res)=>{
    
-  
-    res.status(200).json({
-      user:req.user,
-      cookies:req.cookies
-    });
+  res.send("hello");
+    
+})
+
+app.get("/user",checkUserLoggedIn,(req,res)=>{
+  res.status(200).json({
+    user:req.user,
+    cookies:req.cookies
+  });
 })
 
 
