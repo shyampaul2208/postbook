@@ -33,19 +33,22 @@ const userSchema=new mongoose.Schema({
     name:String,
     googleId:String,
     profileImage:String,
-})
+});
 
 const User=mongoose.model("User",userSchema);
 
 const postSchema=new mongoose.Schema({
-    createdBy:userSchema,
+    createdBy:{
+      type:ObjectId,
+      ref:"User"
+    },
     selectedFile:String,
     description:String,
     likes:{
       type:[String],
       default:[]
     }
-})
+},{timestamps:true})
 const Post=mongoose.model("Post",postSchema);
 
 passport.serializeUser(function(user, done) {
@@ -142,7 +145,7 @@ app.get("/user",checkUserLoggedIn,(req,res)=>{
 app.get("/login/success", checkUserLoggedIn, (req, res) => {
 
 
-  Post.find({}).then((results)=>{
+  Post.find().populate("createdBy","_id name profileImage").sort("-createdAt").then((results)=>{
     res.json(results)
   }).catch(err=>{
     console.log(err)
@@ -193,8 +196,10 @@ app.post("/addpost",checkUserLoggedIn,(req,res)=>{
 
    app.get("/myposts",checkUserLoggedIn,(req,res)=>{
    
-    Post.find({createdBy:req.user},(err,results)=>{
-        res.status(200).json(results);
+    Post.find({createdBy:req.user._id}).populate("createdBy", "_id name").then(results=>{
+      res.status(200).json(results);
+    }).catch(err=>{
+      console.log(err);
     })
   
   })
@@ -211,8 +216,9 @@ app.get("/post/:id",checkUserLoggedIn,(req,res)=>{
 })
 
 app.get("/:userName",checkUserLoggedIn,(req,res)=>{
-console.log(req.params.userName);
-  Post.find({"createdBy.name":req.params.userName}).then(results=>{
+ 
+  let userPattern=new RegExp("^"+req.params.userName)
+  Post.find({"createdBy.name":{$regex:userPattern}}).then(results=>{
     res.json(results);
   })
 
