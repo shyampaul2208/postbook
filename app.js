@@ -61,7 +61,7 @@ passport.serializeUser(function(user, done) {
 
 passport.use(new GoogleStrategy({
     clientID: "24468091533-938rp6vole9r6tfo206jcdmr7a2n209t.apps.googleusercontent.com",
-    clientSecret:"0X7qBzs4hutXG7T8DvH-pyg2" ,
+    clientSecret:"W2UNhm_12AFprzzExMXofcqn" ,
     callbackURL: "https://friendly-celsius-82819.herokuapp.com/auth/google/good"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -152,8 +152,8 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
-    res.send("hii")
-    //res.redirect("https://blissful-ritchie-b74df9.netlify.app");
+    
+    res.redirect("https://blissful-ritchie-b74df9.netlify.app");
   }
 );
 
