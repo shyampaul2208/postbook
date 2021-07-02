@@ -115,6 +115,8 @@ app.get('/failed', (req, res) => {
   const checkUserLoggedIn = (req, res, next) => {
     if(req.user){
        next();
+    }else{
+      res.status(404);
     }
   }
 
