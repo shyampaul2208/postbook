@@ -17,7 +17,7 @@ function App() {
 
   useEffect(()=>{
     
-    axios.get("https://friendly-celsius-82819.herokuapp.com/user").then((response)=>{
+    axios.get("/user").then((response)=>{
      
     
       if (response.status === 200){
