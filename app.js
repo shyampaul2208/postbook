@@ -157,7 +157,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
     
-    res.redirect("/shyam");
+    res.redirect("/");
   }
 );
 
@@ -263,7 +263,7 @@ if(process.env.NODE_ENV==="production")
 {
     app.use(express.static('client/build'));
     const path = require('path');
-    app.get('*',(req,res)=>{
+    app.get('/',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     })
 }
