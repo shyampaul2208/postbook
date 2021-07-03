@@ -3,22 +3,33 @@ const mongoose=require("mongoose");
 const app=express()
 const passport = require('passport');
 const session = require('express-session')
-const cookieParser = require("cookie-parser");
-const cors=require("cors");
+
+// const cors=require("cors");
 
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
-app.set("trust proxy",1);
+if(process.env.NODE_ENV==="production")
+{
+    app.use(express.static('client/build'));
+    const path = require('path');
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
-  app.use(
-      cors({
-       origin: "https://blissful-ritchie-b74df9.netlify.app", // allow to server to accept request from different origin
-       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-       credentials: true // allow session cookie from browser to pass through
-      })
-    );
+
+
+// app.set("trust proxy",1);
+
+//   app.use(
+//       cors({
+//        origin: "https://blissful-ritchie-b74df9.netlify.app", // allow to server to accept request from different origin
+//        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//        credentials: true // allow session cookie from browser to pass through
+//       })
+//     );
 
   
 
