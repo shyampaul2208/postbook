@@ -10,15 +10,6 @@ mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
-if(process.env.NODE_ENV==="production")
-{
-    app.use(express.static('client/build'));
-    const path = require('path');
-    app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-    })
-}
-
 
 
 // app.set("trust proxy",1);
@@ -137,11 +128,6 @@ app.get('/failed', (req, res) => {
   //Protected Route.
 
 
-  app.get("/",(req,res)=>{
-   
-  res.send("hello");
-    
-})
 
 app.get("/user",checkUserLoggedIn,(req,res)=>{
   res.status(200).json({
@@ -272,6 +258,15 @@ app.patch("/post/:id",checkUserLoggedIn,(req,res)=>{
 })
 
 
+
+if(process.env.NODE_ENV==="production")
+{
+    app.use(express.static('client/build'));
+    const path = require('path');
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
 
 
