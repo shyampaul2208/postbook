@@ -6,10 +6,12 @@ import {Link} from "react-router-dom";
 function MyPosts(props){
     
    const [myuploads,setMyuploads]=useState([]);
+   const [requested,setRequested]=useState(false);
    const user=props.user;
 
    useEffect(()=>{
      axios.get("/subposts").then((res)=>{
+     setRequested(true)   
      setMyuploads(res.data)
      }).catch(err=>{
         console.log(err)
@@ -38,7 +40,11 @@ function MyPosts(props){
 
    return (
     <div className="container-fluid">
-      {myuploads.length ?
+     
+     {
+        !requested ? <h1>loading...</h1> :
+
+        myuploads.length ?
        myuploads.map((image,index)=>{
           return (
              <div className="card">
@@ -50,8 +56,12 @@ function MyPosts(props){
              </div>
           )
           
-       }) : <h1>loading ...</h1>
-    }
+       }) : <h1>you haven't posted anything</h1>
+
+     }
+    
+
+     
     </div>
    )
 
