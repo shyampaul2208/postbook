@@ -2,7 +2,7 @@ const express=require("express")
 const mongoose=require("mongoose");
 const app=express()
 const passport = require('passport');
-const session = require('express-session')
+const cookieSession = require('cookie-session');
 
 // const cors=require("cors");
 
@@ -94,18 +94,11 @@ passport.use(new GoogleStrategy({
 
 //Configure Session Storage
 
-app.use(
-  session({
-    secret: "secretcode",
-    resave:true,
-    saveUninitialized:true,
-    cookie:{
-      sameSite:"none",
-      secure:true,
-      maxAge:1000*60*60*24*7 //one week
-    }
-  })
-)
+app.use(cookieSession({
+  name: 'session-name',
+  keys: ["key1","key2"]
+}))
+
 
 
 //Configure Passport
@@ -121,7 +114,7 @@ app.get('/failed', (req, res) => {
     if(req.user){
        next();
     }else{
-      res.status(404);
+      res.redirect("/auth/google");
     }
   }
 
@@ -131,8 +124,7 @@ app.get('/failed', (req, res) => {
 
 app.get("/user",checkUserLoggedIn,(req,res)=>{
   res.status(200).json({
-    user:req.user,
-    cookies:req.cookies
+    user:req.user
   });
 })
 
@@ -157,7 +149,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
     
-    res.redirect("/");
+    res.redirect("/user");
   }
 );
 
@@ -166,16 +158,13 @@ app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: 
   app.get('/logout', (req, res)=>{
   
     req.logout();
-    res.redirect("https://blissful-ritchie-b74df9.netlify.app");
+    res.redirect("/");
     
 })
 
-// app.use((req,res)=>{
-//     res.json("error 404 not found")
-//   })
 
   
-app.post("/addpost",checkUserLoggedIn,(req,res)=>{
+app.post("/newpost",checkUserLoggedIn,(req,res)=>{
   
 
     const post=new Post({
@@ -191,7 +180,7 @@ app.post("/addpost",checkUserLoggedIn,(req,res)=>{
 
 })
 
-   app.get("/myposts",checkUserLoggedIn,(req,res)=>{
+   app.get("/subposts",checkUserLoggedIn,(req,res)=>{
    
     Post.find({createdBy:req.user._id}).populate("createdBy", "_id name").then(results=>{
       res.status(200).json(results);
@@ -212,7 +201,7 @@ app.get("/post/:id",checkUserLoggedIn,(req,res)=>{
     })
 })
 
-app.get("/:userName",checkUserLoggedIn,(req,res)=>{
+app.get("/searched/:userName",checkUserLoggedIn,(req,res)=>{
  
   let userPattern=new RegExp("^"+req.params.userName,"i");
   
@@ -263,7 +252,7 @@ if(process.env.NODE_ENV==="production")
 {
     app.use(express.static('client/build'));
     const path = require('path');
-    app.get('/',(req,res)=>{
+    app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     })
 }

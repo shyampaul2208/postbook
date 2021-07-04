@@ -9,7 +9,7 @@ function MyPosts(props){
    const user=props.user;
 
    useEffect(()=>{
-     axios.get("https://friendly-celsius-82819.herokuapp.com/myposts",{withCredentials:true}).then((res)=>{
+     axios.get("/subposts").then((res)=>{
      setMyuploads(res.data)
      }).catch(err=>{
         console.log(err)
@@ -19,7 +19,7 @@ function MyPosts(props){
    function handleDelete(event){
       event.preventDefault()
       const id=event.target.name;
-      axios.delete(`https://friendly-celsius-82819.herokuapp.com/post/${id}`,{withCredentials:true}).then((res)=>{
+      axios.delete(`/post/${id}`).then((res)=>{
          console.log(res)
          setMyuploads(prev=>{
             return prev.filter(image=>{

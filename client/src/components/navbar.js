@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react"
 import {Link} from "react-router-dom";
 
@@ -6,9 +7,7 @@ function Navbar(props){
 
  function handleLogout(event){
      event.preventDefault()
-    window.open("https://friendly-celsius-82819.herokuapp.com/logout", "_self");
-
-    
+    axios.get("/logout")
  }
 
 

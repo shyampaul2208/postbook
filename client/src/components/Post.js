@@ -32,7 +32,7 @@ function Post(props){
            const finalLikes={likes:[...postLikes,props.userid]}
            
         
-           axios.patch(`https://friendly-celsius-82819.herokuapp.com/post/${props.imageid}`,finalLikes,{withCredentials:true}).then(res=>{
+           axios.patch(`/post/${props.imageid}`,finalLikes).then(res=>{
                console.log(res);
            }).catch(err=>{
                console.log(err);
@@ -47,7 +47,7 @@ function Post(props){
                return like!=props.userid;
            })}
            
-           axios.patch(`https://friendly-celsius-82819.herokuapp.com/post/${props.imageid}`,finalLikes,{withCredentials:true}).then(res=>{
+           axios.patch(`/post/${props.imageid}`,finalLikes).then(res=>{
                console.log(res);
            }).catch(err=>{
                console.log(err);

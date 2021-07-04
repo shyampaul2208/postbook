@@ -12,7 +12,7 @@ function Feed(props){
 
   useEffect(()=>{
 
-    axios.get("https://friendly-celsius-82819.herokuapp.com/login/success",{withCredentials:true}).then((response)=>{
+    axios.get("/login/success").then((response)=>{
     
     setPosts(response.data)
 

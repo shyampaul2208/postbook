@@ -17,7 +17,7 @@ function handleClick(){
     if(content){
 
     
-    axios.get(`https://friendly-celsius-82819.herokuapp.com/${content}`,{withCredentials:true}).then((res)=>{  
+    axios.get(`/searched/${content}`).then((res)=>{  
     setUsers(res.data);
     setPosts([]);
     }).catch(err=>console.log(err));
@@ -30,7 +30,7 @@ function callPosts(event){
 
   setContent(event.target.value);
     
-    axios.get(`https://friendly-celsius-82819.herokuapp.com/user/${event.target.name}`,{withCredentials:true}).then((res)=>{ 
+    axios.get(`/user/${event.target.name}`).then((res)=>{ 
     setPosts(res.data);
     setUsers([]);
     

@@ -40,7 +40,7 @@ function Addpost(props){
         if(post.selectedFile || post.description)
         {
           setIsuploaded(true);
-        axios.post("https://friendly-celsius-82819.herokuapp.com/addpost",post,{withCredentials:true}).then((res)=>{
+        axios.post("/newpost",post).then((res)=>{
           setIsSubmitted(true)
         }).catch(err=>{
           console.log(err);

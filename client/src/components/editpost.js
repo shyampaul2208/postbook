@@ -8,7 +8,7 @@ function Editpost(props){
     const [post,setPost]=useState(null);
     
      useEffect(()=>{
-         axios.get(`https://friendly-celsius-82819.herokuapp.com/post/${props.match.params.id}`,{withCredentials:true}).then((res)=>{
+         axios.get(`/post/${props.match.params.id}`).then((res)=>{
             setPost(res.data[0]);
          }).catch(err=>{
              console.log(err)
@@ -49,7 +49,7 @@ function Editpost(props){
         {
 
         
-        axios.patch(`https://friendly-celsius-82819.herokuapp.com/post/${props.match.params.id}`,post,{withCredentials:true}).then((res)=>{
+        axios.patch(`/post/${props.match.params.id}`,post).then((res)=>{
           console.log(res);
           setIsSubmitted(true)
         }).catch(err=>{

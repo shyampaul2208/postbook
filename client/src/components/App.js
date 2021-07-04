@@ -15,11 +15,11 @@ function App() {
   const[user,setUser]=useState({});
 
 
-  useEffect(()=>{
+ 
+  
+  function handleLogin(){
     
-    axios.get("/user").then((response)=>{
-     
-    
+    axios.get("/auth/google").then(res=>{
       if (response.status === 200){
         setIsAuthentcated(true)
         setUser(response.data.user);
@@ -27,15 +27,7 @@ function App() {
     }).catch(err=>{
       console.log(err);
     })
-  },[])
-
-  
-
-  
-  function handleLogin(){
-    
-    
-     window.open("https://friendly-celsius-82819.herokuapp.com/auth/google", "_self");
+     
   }
   
 
