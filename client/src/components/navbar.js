@@ -7,7 +7,9 @@ function Navbar(props){
 
  function handleLogout(event){
      event.preventDefault()
-    axios.get("/logout")
+    axios.get("/logout").then(res=>{
+        console.log(res);
+    })
  }
 
 

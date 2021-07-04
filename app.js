@@ -155,7 +155,7 @@ app.get('/auth/google/good', passport.authenticate('google', { failureRedirect: 
 
 
 
-  app.get('/logout', (req, res)=>{
+app.get('/logout', (req, res)=>{
   
     req.logout();
     res.redirect("/");
