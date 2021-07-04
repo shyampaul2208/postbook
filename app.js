@@ -178,7 +178,7 @@ app.post("/newpost",checkUserLoggedIn,(req,res)=>{
     const post=new Post({
       createdBy:req.user,
       selectedFile:`"/uploads/${file.name}`,
-      description:req.body.description
+      description:"hii"
 
   })
   post.save().then(()=>{
