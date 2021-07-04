@@ -14,21 +14,23 @@ function App() {
   const [isAuthenticated,setIsAuthentcated]=useState(false);
   const[user,setUser]=useState({});
 
-
+useEffect(()=>{
+ axios.get("/user").then(res=>{
+  if (res.status === 200){
+    setIsAuthentcated(true)
+    setUser(res.data.user);
+  }
+ })
+},[])
  
   
   function handleLogin(){
     
-    axios.get("/auth/google").then(res=>{
-      if (res.status === 200){
-        setIsAuthentcated(true)
-        setUser(res.data.user);
-      }
-    }).catch(err=>{
-      console.log(err);
-    })
-     
+    axios.get("/auth/google")
   }
+      
+  
+  
   
 
   return (
