@@ -91,15 +91,6 @@ function Editpost(props){
         <img className="image" src={post.selectedFile} />
         
       <form onSubmit={formSubmit}>
-        <FileBase
-        type="file"
-        multiple={false}
-        onDone={({base64})=>setPost({...post,selectedFile:base64})}
-        value={post.selectedFile}
-        
-         />
-
-
         <textarea
         className="addDescription"
           onChange={handleDescriptionChange}

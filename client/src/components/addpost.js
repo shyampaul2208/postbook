@@ -14,23 +14,23 @@ function Addpost(props){
     const[isuploaded,setIsuploaded]=useState(false);
     const [url,setUrl] = useState("");
 
-    useEffect(()=>{
+    // useEffect(()=>{
       
-      if(url){
+    //   if(url){
          
-        setIsuploaded(true);
+    //     setIsuploaded(true);
           
-        axios.post("/newpost",{description:post.description,selectedFile:url}).then((res)=>{
-          setIsSubmitted(true)
-        }).catch(err=>{
-          console.log(err);
-        })
+    //     axios.post("/newpost",{description:post.description,selectedFile:url}).then((res)=>{
+    //       setIsSubmitted(true)
+    //     }).catch(err=>{
+    //       console.log(err);
+    //     })
         
 
-      }
+    //   }
      
 
-    },[url])
+    // },[url])
 
     
 
@@ -61,18 +61,45 @@ function Addpost(props){
         event.preventDefault()
 
         if(post.selectedFile){
-          const formData=new FormData();
-          formData.append("file",post.selectedFile);
-          formData.append("upload_preset","ml_default");
+          const data={
+             "file": post.selectedFile,
+             "upload_preset":"ml_default"
+          }
 
-          axios.post("https://api.cloudinary.com/v1_1/dxiiqch27/image/upload",formData).then(res=>{
-            setUrl(res.data.url);
-           
+          setIsuploaded(true);
+          
+          axios.post("https://api.cloudinary.com/v1_1/dxiiqch27/image/upload",data).then(res=>{
+            
+            axios.post("/newpost",{description:post.description,selectedFile:res.data.url}).then((response)=>{
+            setIsSubmitted(true);
+          }).catch(error=>{
+          console.log(error);
           })
 
+
+           }).catch(err=>{
+             console.log(err);
+           })
+
         }else{
-          alert("please choose a file");
+          
+          if(post.description){
+
+            setIsuploaded(true);
+          
+            axios.post("/newpost",post).then((response)=>{
+              setIsSubmitted(true)
+            }).catch(error=>{
+            console.log(error);
+            })
+          }else{
+            alert("please add content");
+          }
+
+
         }
+
+        
       
         
       }
