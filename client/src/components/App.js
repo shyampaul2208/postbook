@@ -26,7 +26,7 @@ useEffect(()=>{
   
   function handleLogin(){
     
-    axios.get("/auth/google")
+    window.open("https://friendly-celsius-82819.herokuapp.com/auth/google","_self")
   }
       
   
