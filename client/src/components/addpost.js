@@ -1,4 +1,4 @@
-import react, { useState } from "react"
+import react, { useEffect, useState } from "react"
 import axios from "axios";
 import FileBase from "react-file-base64";
 import { Route, Redirect } from "react-router-dom";
@@ -12,6 +12,29 @@ function Addpost(props){
 
     const[isSubmitted,setIsSubmitted]=useState(false);
     const[isuploaded,setIsuploaded]=useState(false);
+    const [url,setUrl] = useState("");
+
+    useEffect(()=>{
+      
+      if(url){
+         
+        setIsuploaded(true);
+          
+        axios.post("/newpost",{description:post.description,selectedFile:url}).then((res)=>{
+          setIsSubmitted(true)
+        }).catch(err=>{
+          console.log(err);
+        })
+        
+
+      }
+     
+
+    },[url])
+
+    
+
+
    
     function handleDescriptionChange(event){
      const value=event.target.value
@@ -24,17 +47,7 @@ function Addpost(props){
      })
     }
 
-    function onChange(event){
-      const name=event.target.files[0];
-      setPost((prev)=>{
-        return {
-          ...prev,
-          selectedFile:name
-        }
-      })
-    }
-
-  
+   
       
     
     
@@ -46,23 +59,26 @@ function Addpost(props){
 
     function formSubmit(event){
         event.preventDefault()
-      
-        if(post.selectedFile || post.description)
-        {
-          setIsuploaded(true);
+
+        if(post.selectedFile){
           const formData=new FormData();
           formData.append("file",post.selectedFile);
-          formData.append("description",post.description);
-        axios.post("/newpost",formData).then((res)=>{
-          setIsSubmitted(true)
-        }).catch(err=>{
-          console.log(err);
-        })
-      }else{
-        alert("please choose a file")
+          formData.append("upload_preset","ml_default");
+          formData.append("cloud_name","dxiiqch27");
+
+          axios.post("https://api.cloudinary.com/v1_1/dxiiqch27/image/upload",formData).then(res=>{
+            setUrl(res.data.url);
+           
+          })
+
+        }else{
+          alert("please choose a file");
+        }
+      
+        
       }
 
-  }
+  
 
  
        
@@ -94,15 +110,15 @@ function Addpost(props){
         
          
           <div>
-          {/* <FileBase
+           <FileBase
           type="file"
           multiple={false}
           onDone={({base64})=>setPost({...post,selectedFile:base64})}
           value={post.selectedFile}
           
-           /> */}
+           /> 
 
-           <input type="file" onChange={onChange} />
+           
   
            </div>
            </div>

@@ -2,7 +2,6 @@ const express=require("express")
 const mongoose=require("mongoose");
 const app=express()
 const passport = require('passport');
-const fileUpload=require("express-fileupload");
 const cookieSession = require('cookie-session');
 
 // const cors=require("cors");
@@ -10,7 +9,6 @@ const cookieSession = require('cookie-session');
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-app.use(fileUpload());
 
 
 // app.set("trust proxy",1);
@@ -167,27 +165,16 @@ app.get('/logout', (req, res)=>{
   
 app.post("/newpost",checkUserLoggedIn,(req,res)=>{
   
-  console.log(req.files);
+  const post=new Post({
+    createdBy:req.user,
+    selectedFile:req.body.selectedFile,
+    description:req.body.description
 
-  const file=req.files.file;
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`,err=>{
-    if(err){
-      console.log(err);
-      return res.status(500);
-    }
+})
+post.save().then(()=>{
+    res.json("successfully saved")
+})
 
-    const post=new Post({
-      createdBy:req.user,
-      selectedFile:`/uploads/${file.name}`,
-      description:req.body.description
-
-  })
-  post.save().then(()=>{
-      res.json("successfully saved")
-  })
- 
-
-  })
 
     
 
