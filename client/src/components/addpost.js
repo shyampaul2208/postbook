@@ -64,7 +64,6 @@ function Addpost(props){
           const formData=new FormData();
           formData.append("file",post.selectedFile);
           formData.append("upload_preset","ml_default");
-          formData.append("cloud_name","dxiiqch27");
 
           axios.post("https://api.cloudinary.com/v1_1/dxiiqch27/image/upload",formData).then(res=>{
             setUrl(res.data.url);
