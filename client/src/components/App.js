@@ -20,9 +20,9 @@ function App() {
   function handleLogin(){
     
     axios.get("/auth/google").then(res=>{
-      if (response.status === 200){
+      if (res.status === 200){
         setIsAuthentcated(true)
-        setUser(response.data.user);
+        setUser(res.data.user);
       }
     }).catch(err=>{
       console.log(err);
