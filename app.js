@@ -114,7 +114,7 @@ app.get('/failed', (req, res) => {
     if(req.user){
        next();
     }else{
-      res.redirect("/auth/google");
+      res.status(404);
     }
   }
 
