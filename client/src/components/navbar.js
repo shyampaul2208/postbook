@@ -7,9 +7,7 @@ function Navbar(props){
 
  function handleLogout(event){
      event.preventDefault()
-    axios.get("/logout").then(res=>{
-        console.log(res);
-    })
+     window.open("https://friendly-celsius-82819.herokuapp.com/logout","_self")
  }
 
 
