@@ -24,6 +24,16 @@ function Addpost(props){
      })
     }
 
+    function onChange(event){
+      const name=event.target.files[0];
+      setPost((prev)=>{
+        return {
+          ...prev,
+          selectedFile:name
+        }
+      })
+    }
+
   
       
     
@@ -40,7 +50,14 @@ function Addpost(props){
         if(post.selectedFile || post.description)
         {
           setIsuploaded(true);
-        axios.post("/newpost",post).then((res)=>{
+          const formData=new FormData();
+          formData.append("file",post.selectedFile);
+          formData.append("description",post.description);
+        axios.post("/newpost",formData,{
+          headers:{
+            "Content-Type" :"multipart/form-data"
+          }
+        }).then((res)=>{
           setIsSubmitted(true)
         }).catch(err=>{
           console.log(err);
@@ -81,13 +98,15 @@ function Addpost(props){
         
          
           <div>
-          <FileBase
+          {/* <FileBase
           type="file"
           multiple={false}
           onDone={({base64})=>setPost({...post,selectedFile:base64})}
           value={post.selectedFile}
           
-           />
+           /> */}
+
+           <input type="file" onChange={onChange} />
   
            </div>
            </div>
