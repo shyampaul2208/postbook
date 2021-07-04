@@ -11,6 +11,7 @@ function MyPosts(props){
 
    useEffect(()=>{
      axios.get("/subposts").then((res)=>{
+        console.log(res);
      setRequested(true)   
      setMyuploads(res.data)
      }).catch(err=>{

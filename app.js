@@ -2,7 +2,7 @@ const express=require("express")
 const mongoose=require("mongoose");
 const app=express()
 const passport = require('passport');
-const fileupload=require("express-fileupload");
+const fileUpload=require("express-fileupload");
 const cookieSession = require('cookie-session');
 
 // const cors=require("cors");
@@ -10,7 +10,7 @@ const cookieSession = require('cookie-session');
 mongoose.connect("mongodb+srv://admin-shyam:shyampaul4041@cluster0.kodas.mongodb.net/instaDB",{useNewUrlParser:true,useUnifiedTopology:true});
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-app.use(fileupload());
+app.use(fileUpload());
 
 
 // app.set("trust proxy",1);
@@ -167,6 +167,7 @@ app.get('/logout', (req, res)=>{
   
 app.post("/newpost",checkUserLoggedIn,(req,res)=>{
   
+  console.log(req.files);
 
   const file=req.files.file;
   file.mv(`${__dirname}/client/public/uploads/${file.name}`,err=>{
@@ -177,8 +178,8 @@ app.post("/newpost",checkUserLoggedIn,(req,res)=>{
 
     const post=new Post({
       createdBy:req.user,
-      selectedFile:`"/uploads/${file.name}`,
-      description:"hii"
+      selectedFile:`/uploads/${file.name}`,
+      description:req.body.description
 
   })
   post.save().then(()=>{
@@ -260,14 +261,14 @@ app.patch("/post/:id",checkUserLoggedIn,(req,res)=>{
 
 
 
-if(process.env.NODE_ENV==="production")
-{
+
+
     app.use(express.static('client/build'));
     const path = require('path');
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     })
-}
+
 
 
 

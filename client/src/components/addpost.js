@@ -52,12 +52,8 @@ function Addpost(props){
           setIsuploaded(true);
           const formData=new FormData();
           formData.append("file",post.selectedFile);
-          //formData.append("description",post.description);
-        axios.post("/newpost",formData,{
-          headers:{
-            "Content-Type" :"multipart/form-data"
-          }
-        }).then((res)=>{
+          formData.append("description",post.description);
+        axios.post("/newpost",formData).then((res)=>{
           setIsSubmitted(true)
         }).catch(err=>{
           console.log(err);
