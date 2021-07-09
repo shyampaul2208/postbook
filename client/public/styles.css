@@ -148,6 +148,10 @@ body{
     font-size: 0.8rem;
 }
 
+.fa-trash, .fa-edit{
+    pointer-events: none;
+}
+
 
 @media (max-width: 600px ) {
     
