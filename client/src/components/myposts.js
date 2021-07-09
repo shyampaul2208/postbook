@@ -58,7 +58,9 @@ function MyPosts(props){
              </div>
           )
           
-       }) : <h1>you haven't posted anything</h1>
+       }) : <div> <h1>you haven't posted anything </h1> <button className="btn btn-dark" onClick={()=>{
+           props.history.push("/addpost");
+       }}> Add Post </button> </div>
 
      }
     
