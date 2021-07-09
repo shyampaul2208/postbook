@@ -148,7 +148,10 @@ body{
     font-size: 0.8rem;
 }
 
-.fa-trash, .fa-edit{
+.fa-edit{
+    pointer-events: none;
+}
+.fa-trash-alt{
     pointer-events: none;
 }
 
