@@ -112,9 +112,13 @@ body{
 
 .search{
     width:70%;
-    height: 50px;
+    height: 45px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.serbtn{
+    margin-bottom: 5;
 }
 
 

@@ -42,7 +42,7 @@ useEffect(()=>{
        
        <p>please login to continue</p>
 
-       <button className="btn btn-primary" onClick={handleLogin}>Sign in with google <i class="fab fa-google"></i></button></div> :
+       <button className="btn btn-primary" onClick={handleLogin}>Sign in with google <span><i class="fab fa-google"></i></span></button></div> :
       <div>
         
         <Route
