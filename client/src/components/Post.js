@@ -74,7 +74,7 @@ function Post(props){
             <div className="card-body">
             <p className="description">{props.text}</p>
            <div>
-            <span onClick={handleClick}>{isLiked ? <i class="fas fa-heart fa-3x"></i>  : <i class="far fa-heart fa-2x"></i> }</span>
+            <span onClick={handleClick}>{isLiked ? <i class="fas fa-heart fa-2x"></i>  : <i class="far fa-heart fa-2x"></i> }</span>
             <span>{
                isLiked ?
                 postLikes.length-1==0 ? "you" : postLikes.length-1==1 ? "  you and 1 other":`you and ${postLikes.length-1} others`   : postLikes.length
