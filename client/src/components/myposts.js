@@ -53,7 +53,7 @@ function MyPosts(props){
              <div className="delandedit">
              <button className="btn btn-light"   key={index} name={image._id}  onClick={handleDelete}><i class="fas fa-trash-alt"></i></button>
 
-             <button className="btn btn-light"><Link to={`/myposts/edit/${image._id}`}><i class="far fa-edit"></i></Link></button>
+             <button className="btn btn-light del"><Link to={`/myposts/edit/${image._id}`}><i class="far fa-edit"></i></Link></button>
              </div>
              </div>
           )
