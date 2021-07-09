@@ -58,7 +58,7 @@ function MyPosts(props){
              </div>
           )
           
-       }) : <div className="emptyposts"> <h1>you haven't posted anything </h1> <button className="btn btn-dark"><a className="mypostadd" href="/addpost">Add Post</a>  </button> </div>
+       }) : <div className="emptyposts"> <h1>you haven't posted anything </h1> <button className="btn btn-dark"><Link className="mypostadd" href="/addpost">Add Post</Link>  </button> </div>
 
      }
     
