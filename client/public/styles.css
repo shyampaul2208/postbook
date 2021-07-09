@@ -6,7 +6,6 @@ body{
     margin: 0;
     padding: 0;
     padding-bottom: 20px;
-    text-align: center;
     align-items: center;
 
 }
@@ -139,6 +138,11 @@ body{
     text-decoration: none;
     color: white;
 }
+.mypostadd:hover{
+    text-decoration: none;
+    color: white;
+}
+
 
 
 @media (max-width: 600px ) {
