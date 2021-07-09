@@ -6,6 +6,7 @@ body{
     margin: 0;
     padding: 0;
     padding-bottom: 20px;
+    text-align: center;
     align-items: center;
 
 }
@@ -123,6 +124,20 @@ body{
 
 .del{
  margin-left: 20px;
+}
+
+.emptyposts{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25vh;
+  text-align: center;
+  width: 80vw;
+
+}
+
+.mypostadd{
+    text-decoration: none;
+    color: white;
 }
 
 
