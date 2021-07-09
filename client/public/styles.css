@@ -37,9 +37,10 @@ body{
 .login{
     margin-left: auto;
     margin-right: auto;
+    margin-top: 40vh;
     width: 80vw;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    
 
 }
 
