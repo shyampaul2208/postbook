@@ -33,7 +33,7 @@ function Post(props){
            
         
            axios.patch(`/post/${props.imageid}`,finalLikes).then(res=>{
-               console.log(res);
+              //console.log(res)
            }).catch(err=>{
                console.log(err);
            })
@@ -74,7 +74,7 @@ function Post(props){
             <div className="card-body">
             <p className="description">{props.text}</p>
            <div>
-            <button onClick={handleClick}>{isLiked ? <i class="far fa-heart"></i> : <i class="fas fa-heart"></i>}</button>
+            <button onClick={handleClick}>{isLiked ? <i class="fas fa-heart"></i>  : <i class="far fa-heart"></i> }</button>
             <span>{
                isLiked ?
                 postLikes.length-1==0 ? "you" : postLikes.length-1==1 ? "you and 1 other":`you and ${postLikes.length-1} others`   : postLikes.length

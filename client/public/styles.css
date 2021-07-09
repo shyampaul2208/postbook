@@ -121,6 +121,10 @@ body{
     margin-bottom: 5;
 }
 
+.del{
+ margin-right: 5px;
+}
+
 
 @media (max-width: 600px ) {
     
