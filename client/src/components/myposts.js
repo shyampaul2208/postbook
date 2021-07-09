@@ -51,8 +51,8 @@ function MyPosts(props){
              <div className="card">
              <Post key={image._id} userid={user._id} imageid={image._id} text={image.description} src={image.selectedFile} creator={image.createdBy.name} likes={image.likes} />
              <div className="delandedit">
-             <button  key={index} name={image._id}  onClick={handleDelete}>DELETE</button>
-             <button><Link to={`/myposts/edit/${image._id}`}> EDIT</Link></button>
+             <button  key={index} name={image._id}  onClick={handleDelete}><i class="fas fa-trash-alt"></i></button>
+             <button><Link to={`/myposts/edit/${image._id}`}><i class="far fa-edit"></i></Link></button>
              </div>
              </div>
           )
