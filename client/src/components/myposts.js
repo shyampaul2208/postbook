@@ -11,7 +11,7 @@ function MyPosts(props){
 
    useEffect(()=>{
      axios.get("/subposts").then((res)=>{
-        console.log(res);
+        
      setRequested(true)   
      setMyuploads(res.data)
      }).catch(err=>{
@@ -23,7 +23,7 @@ function MyPosts(props){
       event.preventDefault()
       const id=event.target.name;
       axios.delete(`/post/${id}`).then((res)=>{
-         console.log(res)
+      
          setMyuploads(prev=>{
             return prev.filter(image=>{
                return image._id!=id

@@ -37,7 +37,7 @@ useEffect(()=>{
     <div className="container-fluid">
        <Navbar authentication={isAuthenticated} />
 
-      { !isAuthenticated ?  <div> hello <button onClick={handleLogin}>login</button></div> :
+      { !isAuthenticated ?  <div className="login"> <h2>hello</h2> <button onClick={handleLogin}>Sign in with google</button></div> :
       <div>
         
         <Route
