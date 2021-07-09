@@ -165,6 +165,7 @@ function Addpost(props){
           />
           </div>
           <button
+          className="btn btn-dark"
           type="submit">
             Add
           </button>

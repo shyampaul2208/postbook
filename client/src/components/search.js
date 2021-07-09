@@ -52,7 +52,7 @@ function callPosts(event){
      <div class="searchbox">
      
      <input className="search" type="text" value={content} onChange={handleChange} placeholder="search" />
-     <button onClick={handleClick}>search</button>
+     <button className="btn btn-dark" onClick={handleClick}>search</button>
      </div>
       
      <div>

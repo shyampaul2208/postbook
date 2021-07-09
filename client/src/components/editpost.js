@@ -100,6 +100,7 @@ function Editpost(props){
           rows="3"
         />
         <button
+        className="btn btn-dark"
         type="submit">
           update
         </button>
