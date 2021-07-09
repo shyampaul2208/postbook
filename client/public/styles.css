@@ -154,6 +154,9 @@ body{
 .fa-trash-alt{
     pointer-events: none;
 }
+.fa-google{
+    margin: left 10px; ;
+}
 
 
 @media (max-width: 600px ) {
