@@ -158,6 +158,9 @@ body{
     margin: left 10px; ;
 }
 
+.love{
+    color: #FD1D1D;
+}
 
 @media (max-width: 600px ) {
     
@@ -199,7 +202,7 @@ body{
     }
     .search{
         width:80%;
-        height: 50px;
+        height: 45px;
         margin-right: auto;
         margin-left: auto;
     }
