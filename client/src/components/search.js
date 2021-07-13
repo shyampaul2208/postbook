@@ -13,13 +13,14 @@ function handleChange(event){
     setContent(matter);
     
 
-     if(event.target.value){
+     if(content){
         axios.get(`/searched/${content}`).then((res)=>{  
             setUsers(res.data);
             setPosts([]);
             }).catch(err=>console.log(err));
      }else{
          setUsers([]);
+         setPosts([]);
      }
        
     
