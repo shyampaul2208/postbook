@@ -7,6 +7,8 @@ const[content,setContent]=useState("");
 const[users,setUsers]=useState([]);
 const[posts,setPosts]=useState([]);
 const user=props.user;
+
+
  
 function handleChange(event){
     const matter=event.target.value;
@@ -14,7 +16,7 @@ function handleChange(event){
 }
 
 function handleClick(){
-    if(content){
+    if(content&&content.charAt(0)!=" "){
 
     
     axios.get(`/searched/${content}`).then((res)=>{  
