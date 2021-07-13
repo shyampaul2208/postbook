@@ -11,7 +11,7 @@ const user=props.user;
 function handleChange(event){
     const matter=event.target.value;
     setContent(matter);
-    if(content){
+    
 
     
         axios.get(`/searched/${content}`).then((res)=>{  
@@ -19,7 +19,7 @@ function handleChange(event){
         setPosts([]);
         }).catch(err=>console.log(err));
     
-        }
+        
 
 
 }
