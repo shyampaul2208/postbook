@@ -11,6 +11,17 @@ const user=props.user;
 function handleChange(event){
     const matter=event.target.value;
     setContent(matter);
+    if(content){
+
+    
+        axios.get(`/searched/${content}`).then((res)=>{  
+        setUsers(res.data);
+        setPosts([]);
+        }).catch(err=>console.log(err));
+    
+        }
+
+
 }
 
 function handleClick(){
